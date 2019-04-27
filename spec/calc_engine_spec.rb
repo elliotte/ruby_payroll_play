@@ -1,5 +1,6 @@
 require 'calc_engine'
 require 'company'
+require 'employee'
 
 describe CalcEngine do 
       
@@ -42,6 +43,16 @@ describe CalcEngine do
       it '40 percent range tops at 20K' do
          calc = @eng.load_employee_annual_template(100000)
          expect(calc[:paye_40]).to eq 20000
+      end
+
+      it 'can calc nics' do
+         calc = @eng.load_employee_annual_template(45000)
+         expect(calc[:nics]).to eq 4364
+      end
+
+      it 'can calc employer nics' do
+         calc = @eng.load_employee_annual_template(45000)
+         expect(calc[:emers_nics]).to eq 5018
       end
 
    #    it 'should know employee brought forward postion' do
