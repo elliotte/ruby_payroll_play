@@ -5,6 +5,7 @@ describe CalcEngine do
       
       before(:each) do 
       	company = Company.new
+         @employee = Employee.new
       	@eng = CalcEngine.new(company)
       end
 
@@ -13,12 +14,35 @@ describe CalcEngine do
       	expect(@eng.company.employees).to eq []
       end 
 
-   #    it 'should have 0 employees' do
-   #    end 
+      it "should be able to load an employee" do 
+      	@eng.load_company(@employee)
+         expect(@eng.company.employees.count).to eq 1
+      end
 
-   #    it "should be able to receive an employee" do 
-   #    	expect(@eng).to eq ""
-   #    end
+      it 'can calc paye 20 percent range for over 50K' do
+         calc = @eng.load_employee_annual_template(75000)
+         expect(calc[:paye_20]).to eq 10000
+      end
+
+      it 'can calc paye 20 percent range for less 50K' do
+         calc = @eng.load_employee_annual_template(25000)
+         expect(calc[:paye_20]).to eq 2498
+      end
+
+      it 'can calc paye 40 percent range for less 50K' do
+         calc = @eng.load_employee_annual_template(25000)
+         expect(calc[:paye_40]).to eq 0
+      end
+
+      it 'can calc paye 40 percent range for over 80K' do
+         calc = @eng.load_employee_annual_template(80000)
+         expect(calc[:paye_40]).to eq 6996
+      end
+
+      it '40 percent range tops at 20K' do
+         calc = @eng.load_employee_annual_template(100000)
+         expect(calc[:paye_40]).to eq 20000
+      end
 
    #    it 'should know employee brought forward postion' do
    #    end
