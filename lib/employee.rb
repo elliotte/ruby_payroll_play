@@ -1,5 +1,4 @@
 class Employee
-
 	attr_reader :full_name, :salary, :payslip
 
 	def initialize(
@@ -14,15 +13,9 @@ class Employee
 		@full_name = full_name
 		@salary = annual_salary
 		@payslip = {}
-
 	end
+end
 
-	def roll_foward_payslip
-		# extrapolate_annual_template
-		# load_brought_forward_payslip
-		# calculate_employee_monthly_computation
-		# build_carried_forward
-	end
 # Tax Due
 # Net Pay
 # Tax due to Date
@@ -34,8 +27,5 @@ class Employee
 # EE Nic Rebate
 # ER NIC Rebate
 # Surplus Nic Rebate
-
-end
-
 
 
