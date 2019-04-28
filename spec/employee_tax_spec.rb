@@ -53,9 +53,19 @@ describe EmployeeTax do
          expect(tax).to eq 4964
       end
 
+      it 'can calc nics at 75K' do
+         tax = @rate_40.nics
+         expect(tax).to eq 5464
+      end
+
       it 'can calc employer nics' do
          tax = @rate_20_50K.employers_nics
          expect(tax).to eq 5708
+      end
+
+      it 'can calc employer nics' do
+         tax = @rate_40.employers_nics
+         expect(tax).to eq 9158
       end
 
 end

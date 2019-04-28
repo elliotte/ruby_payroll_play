@@ -26,9 +26,7 @@ describe CalcEngine do
 
       it 'can run a employee pay slip' do
          result = @eng.run_employee_payslip(40000)
-         expect(result).to eq 626
-         # expect(@payslip.cf[:paye_20]).to eq 1374
-         # expect(@payslip.cp[:paye_40]).to eq 0
+         result.should be_kind_of(Payslip)
       end
 
 end

@@ -21,6 +21,8 @@ class Company
 		# @employer_paye = employer_paye_no
 		@current_period = current_period
 		@bf = brought_forward
+		@cf = {}
+		@payments = {}
 
 		@employees = []
 	end

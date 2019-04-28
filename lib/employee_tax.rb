@@ -31,18 +31,26 @@ class EmployeeTax
 		primary_threshold = 8632
 		# 12% up to 50K
 		upper_threshold = 50000
-		if @salary <= upper_threshold
-			((@salary-primary_threshold)*0.12).to_i
+		# 2% over 50K
+		if @salary > upper_threshold
+			basic_range = (upper_threshold-primary_threshold)*0.12
+			upper_range = (@salary - 50000)*0.02
+			(basic_range + upper_range).to_i
+		elsif
+		   @salary <= upper_threshold
+		   ((@salary-primary_threshold)*0.12).to_i
+		else
+			#
 		end
-		#extend for higher rate taxpayers
 	end
 
 	def employers_nics
 		primary_threshold = 8632
 		if @salary >= primary_threshold
 		  ((@salary-primary_threshold)*0.138).to_i
+		else
+			0
 		end
-		#extend for higher rate taxpayers
 	end
 
 end
