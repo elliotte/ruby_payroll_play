@@ -1,3 +1,5 @@
+require 'employee_tax'
+
 class Payslip
 	
 	attr_reader :bf, :cp, :cf, :annual_schema
@@ -72,65 +74,13 @@ class Payslip
 	end
 
 	def build_carried_forward
-		##
+		@cf = @bf.merge(@cp){ |k, a_value, b_value| a_value + b_value }
+	end
+
+	def check_if_brought_foward_difference
+		## then smooth methods
 	end
 
 end
 
 #clean up - move into new file
-class EmployeeTax
-
-	def initialize salary
-		@salary = salary
-		@tax_free_allowance = 12509
-		@taxable = @salary - @tax_free_allowance
-	end
-
-	def paye_20
-	  if @salary >= 50000
-		(50000*0.2).to_i
-	  else
-		(@taxable*0.2).to_i
-	  end
-	end
-
-	def paye_40
-	  return 0 if @salary <= 50000	
-	  if @salary < 100000
-	  	((@taxable-50000)*0.4).to_i
-	  else
-	  	(50000*0.4).to_i
-	  end
-
-	end
-
-	def nics
-		lower_threshold = 6136
-		primary_threshold = 8632
-		# 12% up to 50K
-		upper_threshold = 50000
-		if @salary <= upper_threshold
-			((@salary-primary_threshold)*0.12).to_i
-		end
-	end
-
-	def employers_nics
-		primary_threshold = 8632
-		if @salary >= primary_threshold
-		  ((@salary-primary_threshold)*0.138).to_i
-		end
-	end
-	# def employee_template
-	# 	{gross_pay: 0,
-	# 	tax_free_allowance: @tax_free_allowance,	
-	# 	deductions: {
-	# 		paye_20: 0,
-	# 		paye_40: 0,
-	# 		paye_45: 0,
-	# 		nics: 0,
-	# 	},
-	# 	net_wage: 0,
-	# 	emers_ni: 0
-	# 	}
-	# end
-end

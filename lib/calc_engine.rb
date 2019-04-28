@@ -1,3 +1,4 @@
+require 'payslip'
 
 class CalcEngine
 
@@ -10,9 +11,16 @@ class CalcEngine
 	def load_company employee
 		@company.employees << employee
 	end
-	#to seperate into load check template 
-	#and load employee calc
-	#then run financial control checker
+	
+	def run_employee_payslip annual_salary
+	  @payslip = Payslip.new
+	  @payslip.run_annual_schema(annual_salary)
+      @payslip.build_brought_forward(@company.current_period)
+      @payslip.build_current_month
+      @payslip.build_carried_forward
+      @payslip
+	end
+
 end
 
 

@@ -1,5 +1,6 @@
 class Employee
-	attr_reader :full_name, :salary, :payslip
+	attr_accessor :salary
+	attr_reader :full_name, :payslip
 
 	def initialize(
 
